@@ -11,12 +11,16 @@
     "build:wasm": "cd wasm && wasm-pack build --target web --out-dir pkg"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.6.0",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "framer-motion": "^10.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "wasm": "file:wasm/pkg"
+    "wasm": "./wasm/pkg"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.2.0",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
