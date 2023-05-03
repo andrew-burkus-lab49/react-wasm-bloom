@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import './App.css'
-import { Button, Input, Container } from '@chakra-ui/react'
+import { Input, Container } from '@chakra-ui/react'
 import { parseFiles } from './lib'
 import Table from './Table'
 
@@ -19,8 +19,7 @@ function App() {
     <>
       <Container>
         <Input onChange={handleChange} type="file" accept=".csv" />
-        <Button>Submit</Button>
-        <Table header={headers} records={records} />
+        <Table headers={headers} records={records} />
       </Container>
     </>
   )
