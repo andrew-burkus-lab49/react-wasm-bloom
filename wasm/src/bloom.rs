@@ -1,8 +1,6 @@
 use crate::hash_fns;
 use wasm_bindgen::prelude::wasm_bindgen;
 
-const MAX_BYTE_VALUE: u64 = 255;
-
 #[wasm_bindgen]
 pub struct BloomFilter {
     hash_array: Vec<u8>,
@@ -45,7 +43,7 @@ impl BloomFilter {
     fn set_bit(&mut self, index: u64) {
         let length = self.hash_array.len() as usize;
         let byte_index = index as usize % length;
-        let bit_index: u32 = (index % MAX_BYTE_VALUE) as u32;
+        let bit_index: u32 = (index % 8) as u32;
 
         self.hash_array[byte_index] |= u8::pow(2, bit_index);
     }
@@ -53,7 +51,7 @@ impl BloomFilter {
     fn get_bit(&self, hash: u64) -> u8 {
         let length = self.hash_array.len() as usize;
         let byte_index = hash as usize % length;
-        let bit_index: u32 = (hash % MAX_BYTE_VALUE) as u32;
+        let bit_index: u32 = (hash % 8) as u32;
 
         self.hash_array[byte_index] & u8::pow(2, bit_index)
     }
