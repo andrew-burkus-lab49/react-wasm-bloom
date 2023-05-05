@@ -20,11 +20,9 @@ fn khash(s: &str) -> [u64; 5] {
 #[wasm_bindgen]
 impl BloomFilter {
     pub fn new(length: usize) -> BloomFilter {
-        let mut array = Vec::new();
-        for _ in 0..length {
-            array.push(0);
+        BloomFilter {
+            hash_array: vec![0; length],
         }
-        BloomFilter { hash_array: array }
     }
 
     pub fn contains(&self, query: &str) -> bool {
