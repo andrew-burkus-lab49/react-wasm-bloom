@@ -13,8 +13,11 @@ export const parseCSV = (file: string) => {
     return { data, headers }
 }
 
-export const parseFiles = (files: FileList, setHeaders: (headers: string[]) => (void),
-    setRecords: (records: Record<string, string>[]) => void) => {
+export const parseFiles = async (
+    files: FileList,
+    setHeaders: (headers: string[]) => (void),
+    setRecords: (records: Record<string, string>[]) => void
+) => {
     const reader = new FileReader()
 
     reader.addEventListener('load', e => {

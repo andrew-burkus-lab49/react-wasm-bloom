@@ -8,7 +8,7 @@ export default function useFilter() {
 
     useEffect(() => {
         init(WASM_PATH).then(_ => {
-            const filter = BloomFilter.new(1000)
+            const filter = BloomFilter.new(Math.pow(10, 7))
             setFilter(filter)
         })
     }, [setFilter, init])
