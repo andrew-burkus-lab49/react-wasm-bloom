@@ -28,10 +28,9 @@ impl BloomFilter {
         let hashes = khash(query);
         hashes
             .iter()
-            .map(|hash| self.get_bit(*hash))
-            .reduce(|accum, cur| accum & cur)
+            .map(|hash: &u64| self.get_bit(hash))
+            .reduce(|accum, cur| accum && cur)
             .unwrap()
-            == 1
     }
 
     pub fn insert(&mut self, value: &str) {
@@ -42,18 +41,18 @@ impl BloomFilter {
     }
 
     fn set_bit(&mut self, index: u64) {
-        let length = self.hash_array.len() as usize;
+        let length = self.hash_array.len();
         let byte_index = index as usize % length;
         let bit_index: u32 = (index % 8) as u32;
 
         self.hash_array[byte_index] |= u8::pow(2, bit_index);
     }
 
-    fn get_bit(&self, hash: u64) -> u8 {
-        let length = self.hash_array.len() as usize;
-        let byte_index = hash as usize % length;
+    fn get_bit(&self, hash: &u64) -> bool {
+        let length = self.hash_array.len();
+        let byte_index = *hash as usize % length;
         let bit_index: u32 = (hash % 8) as u32;
 
-        self.hash_array[byte_index] & u8::pow(2, bit_index)
+        self.hash_array[byte_index] & u8::pow(2, bit_index) > 0
     }
 }
