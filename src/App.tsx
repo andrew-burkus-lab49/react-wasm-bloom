@@ -3,7 +3,7 @@ import './App.css'
 import { Input, Container } from '@chakra-ui/react'
 import { parseFiles } from './lib'
 import Table from './Table'
-import SelectRecord from './SelectRecord'
+import InsertManager from './InsertManager'
 
 function App() {
   const [records, setRecords] = useState<Record<string, string>[]>([])
@@ -21,7 +21,7 @@ function App() {
       <Container>
         <Input onChange={handleChange} type="file" accept=".csv" />
         <Table headers={headers} records={records} />
-        <SelectRecord options={headers} />
+        <InsertManager records={records} headers={headers} />
       </Container>
     </>
   )

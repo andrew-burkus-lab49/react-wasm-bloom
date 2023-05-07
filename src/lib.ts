@@ -33,3 +33,9 @@ export const parseFiles = (files: FileList, setHeaders: (headers: string[]) => (
         reader.readAsDataURL(files[0])
     }
 }
+
+export const unpack = (key: string) =>
+    (records: Record<string, string>[]) =>
+        records
+            .map(record => record[key])
+            .filter(value => Boolean(value))
