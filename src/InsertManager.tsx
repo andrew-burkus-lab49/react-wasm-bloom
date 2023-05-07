@@ -1,7 +1,8 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import { Container } from "@chakra-ui/react";
 import SelectRecord from "./SelectRecord";
 import { unpack } from "./lib";
+import useFirstValue from "./useFirstValue";
 
 interface InsertManagerProps {
     records: Record<string, string>[]
@@ -9,7 +10,7 @@ interface InsertManagerProps {
 }
 
 const InsertManager: FC<InsertManagerProps> = ({ records, headers }) => {
-    const [selectedHeader, setSelectedHeader] = useState<string>("")
+    const [selectedHeader, setSelectedHeader] = useFirstValue("", headers)
     const unpackHeader = useMemo(() => unpack(selectedHeader), [selectedHeader])
     const recordsWithSelectedHeader = unpackHeader(records)
 
@@ -19,7 +20,7 @@ const InsertManager: FC<InsertManagerProps> = ({ records, headers }) => {
 
     return (
         <Container>
-            <SelectRecord onChange={handleChange} options={headers} />
+            <SelectRecord onChange={handleChange} options={headers} value={selectedHeader} />
             Number of records selected {recordsWithSelectedHeader.length}
         </Container>
     )
