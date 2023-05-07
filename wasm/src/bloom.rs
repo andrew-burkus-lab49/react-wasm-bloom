@@ -1,8 +1,8 @@
 use crate::hash_fns;
 use wasm_bindgen::prelude::wasm_bindgen;
 
-#[wasm_bindgen]
 #[derive(Debug)]
+#[wasm_bindgen]
 pub struct BloomFilter {
     hash_array: Vec<u8>,
 }
@@ -18,6 +18,7 @@ fn khash(s: &str) -> [u64; 5] {
 
 #[wasm_bindgen]
 impl BloomFilter {
+    #[wasm_bindgen(constructor)]
     pub fn new(length: usize) -> BloomFilter {
         BloomFilter {
             hash_array: vec![0; length],

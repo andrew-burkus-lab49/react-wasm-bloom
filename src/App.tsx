@@ -4,10 +4,12 @@ import { Input, Container } from '@chakra-ui/react'
 import { parseFiles } from './lib'
 import Table from './Table'
 import InsertManager from './InsertManager'
+import useFilter from './useFilter'
 
 function App() {
   const [records, setRecords] = useState<Record<string, string>[]>([])
   const [headers, setHeaders] = useState<string[]>([])
+  const filter = useFilter()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target
