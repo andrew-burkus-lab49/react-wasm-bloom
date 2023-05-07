@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from 'react'
-import './App.css'
-import { Input, Container } from '@chakra-ui/react'
+import { Input, Container, Text } from '@chakra-ui/react'
 import { parseFiles } from './lib'
 import Table from './Table'
 import InsertManager from './InsertManager'
 import useFilter from './useFilter'
+import Search from './Search'
 
 function App() {
   const [records, setRecords] = useState<Record<string, string>[]>([])
@@ -19,13 +19,15 @@ function App() {
   }
 
   return (
-    <>
-      <Container>
-        <Input onChange={handleChange} type="file" accept=".csv" />
-        <Table headers={headers} records={records} />
-        <InsertManager records={records} headers={headers} />
-      </Container>
-    </>
+    <Container padding={5} maxWidth='4xl'>
+      <Text fontSize='3xl'>
+        WASM + Rust + React + TypeScript BloomFilter
+      </Text>
+      <Table headers={headers} records={records} />
+      <InsertManager filter={filter} records={records} headers={headers} />
+      <Search filter={filter} />
+      <Input maxWidth="2xl" padding={1} onChange={handleChange} type="file" accept=".csv" />
+    </Container>
   )
 }
 

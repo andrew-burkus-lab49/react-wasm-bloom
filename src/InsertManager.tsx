@@ -1,15 +1,17 @@
 import { FC, useMemo } from "react";
-import { Container } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import SelectRecord from "./SelectRecord";
 import { unpack } from "./lib";
 import useFirstValue from "./useFirstValue";
+import { BloomFilter } from "wasm";
 
 interface InsertManagerProps {
     records: Record<string, string>[]
     headers: string[]
+    filter?: BloomFilter
 }
 
-const InsertManager: FC<InsertManagerProps> = ({ records, headers }) => {
+const InsertManager: FC<InsertManagerProps> = ({ records, headers, filter }) => {
     const [selectedHeader, setSelectedHeader] = useFirstValue("", headers)
     const unpackHeader = useMemo(() => unpack(selectedHeader), [selectedHeader])
     const recordsWithSelectedHeader = unpackHeader(records)
@@ -18,11 +20,22 @@ const InsertManager: FC<InsertManagerProps> = ({ records, headers }) => {
         setSelectedHeader(e.target.value)
     }
 
+    const handleClick = () => {
+        recordsWithSelectedHeader.forEach(record => filter?.insert(record))
+    }
+
     return (
-        <Container>
-            <SelectRecord onChange={handleChange} options={headers} value={selectedHeader} />
-            Number of records selected {recordsWithSelectedHeader.length}
-        </Container>
+        <Box>
+            <SelectRecord
+                onChange={handleChange}
+                options={headers}
+                value={selectedHeader}
+            />
+            <Box paddingY={3}>
+                Number of records selected {recordsWithSelectedHeader.length}
+            </Box>
+            <Button onClick={handleClick}>Insert records</Button>
+        </Box>
     )
 }
 
