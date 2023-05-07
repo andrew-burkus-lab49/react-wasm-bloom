@@ -2,6 +2,7 @@ use crate::hash_fns;
 use wasm_bindgen::prelude::wasm_bindgen;
 
 #[wasm_bindgen]
+#[derive(Debug)]
 pub struct BloomFilter {
     hash_array: Vec<u8>,
 }
