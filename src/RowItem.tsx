@@ -8,7 +8,11 @@ interface RowItemProps {
 const RowItem: FC<RowItemProps> = ({ value }) => {
     return (
         <GridItem>
-            <Container border={'solid grey 0.5px'}>
+            <Container
+                padding={1}
+                border={'solid grey 0.5px'}
+                centerContent
+            >
                 {value}
             </Container>
         </GridItem>

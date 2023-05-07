@@ -23,10 +23,17 @@ function App() {
       <Text fontSize='3xl'>
         WASM + Rust + React + TypeScript BloomFilter
       </Text>
-      <Table headers={headers} records={records} />
+
       <InsertManager filter={filter} records={records} headers={headers} />
       <Search filter={filter} />
-      <Input maxWidth="2xl" padding={1} onChange={handleChange} type="file" accept=".csv" />
+      <Input
+        maxWidth="2xl"
+        padding={1}
+        onChange={handleChange}
+        type="file"
+        accept=".csv"
+      />
+      <Table headers={headers} records={records} />
     </Container>
   )
 }

@@ -25,7 +25,7 @@ const Search: FC<SearchProps> = ({ filter }) => {
     }
 
     return (
-        <Box paddingY={5} boxShadow="sm">
+        <Box paddingY={5}>
             <Input
                 bg={color}
                 type="text"

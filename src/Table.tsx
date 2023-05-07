@@ -1,6 +1,7 @@
-import { GridItem, Grid } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import { FC } from 'react'
 import RecordRow from './RecordRow'
+import HeaderItem from './HeaderItem'
 
 interface TableProps {
     headers: string[]
@@ -9,8 +10,12 @@ interface TableProps {
 
 const Table: FC<TableProps> = ({ headers, records }) => {
     return (
-        <Grid templateColumns={`repeat(${headers.length}, 1fr)`}>
-            {headers.map((value, i) => <GridItem key={i}>{value}</GridItem>)}
+        <Grid
+            templateColumns={`repeat(${headers.length}, 1fr)`}
+            gap={0.5}
+            paddingY={3}
+        >
+            {headers.map((value, i) => <HeaderItem key={i} value={value} />)}
             {records.map((record, i) => <RecordRow key={i} record={record} />)}
         </Grid>
     )
