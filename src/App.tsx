@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { Input, Container, Text } from '@chakra-ui/react'
+import { Input, Container, Text, Box } from '@chakra-ui/react'
 import { parseFiles } from './lib'
 import Table from './Table'
 import InsertManager from './InsertManager'
@@ -9,7 +9,7 @@ import Search from './Search'
 function App() {
   const [records, setRecords] = useState<Record<string, string>[]>([])
   const [headers, setHeaders] = useState<string[]>([])
-  const filter = useFilter()
+  const [filter, filterSize] = useFilter(records.length)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target
@@ -26,6 +26,9 @@ function App() {
 
       <InsertManager filter={filter} records={records} headers={headers} />
       <Search filter={filter} />
+      <Box>
+        Filter size: {filterSize} bytes ({Math.floor(filterSize / 1024)} kB)
+      </Box>
       <Input
         maxWidth="2xl"
         padding={1}

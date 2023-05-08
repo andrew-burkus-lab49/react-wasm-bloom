@@ -16,7 +16,7 @@ const Table: FC<TableProps> = ({ headers, records }) => {
             paddingY={3}
         >
             {headers.map((value, i) => <HeaderItem key={i} value={value} />)}
-            {records.map((record, i) => <RecordRow key={i} record={record} />)}
+            {records.slice(0, 100).map((record, i) => <RecordRow key={i} record={record} />)}
         </Grid>
     )
 }

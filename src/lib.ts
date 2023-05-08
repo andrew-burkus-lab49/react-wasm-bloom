@@ -42,3 +42,7 @@ export const unpack = (key: string) =>
         records
             .map(record => record[key])
             .filter(value => Boolean(value))
+
+export const getFilterLength = (falsePositiveRate: number, elementCount: number) => {
+    return elementCount * 5 * -1 * (Math.log(falsePositiveRate) / Math.log(2) ** 2)
+}

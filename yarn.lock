@@ -2776,7 +2776,7 @@ vite@^4.3.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-wasm@./wasm/pkg:
+"wasm@file:./wasm/pkg":
   version "0.1.0"
 
 which@^2.0.1:

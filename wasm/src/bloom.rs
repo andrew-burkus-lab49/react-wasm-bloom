@@ -41,6 +41,10 @@ impl BloomFilter {
         }
     }
 
+    pub fn size(&self) -> usize {
+        self.hash_array.len()
+    }
+
     fn set_bit(&mut self, index: u64) {
         let length = self.hash_array.len();
         let byte_index = index as usize % length;
