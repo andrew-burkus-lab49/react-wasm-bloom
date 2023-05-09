@@ -27,7 +27,7 @@ function App() {
       <InsertManager filter={filter} records={records} headers={headers} />
       <Search filter={filter} />
       <Box>
-        Filter size: {filterSize} bytes ({Math.floor(filterSize / 1024)} kB)
+        Filter size: {filterSize} bytes ({Math.floor(filterSize / 1000)} kB)
       </Box>
       <Input
         maxWidth="2xl"

@@ -8,7 +8,7 @@ export default function useFilter(size: number) {
     const [filter, setFilter] = useState<BloomFilter>()
 
     useEffect(() => {
-        const length = getFilterLength(0.01, size) || 100
+        const length = getFilterLength(0.0001, size) || 100
         init(WASM_PATH).then(_ => {
             const filter = new BloomFilter(length)
             setFilter(filter)
