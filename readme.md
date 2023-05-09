@@ -17,3 +17,15 @@ certain? That's the compromise. We'll trade absolute certainty for memory effici
 So, what is a BloomFilter? It's actually an incredibly simple idea which is what makes its efficacy so impressive.
 At its core, it's an array of unsigned bytes and an algorithm for looking up addresses of a handful of bytes based
 on a given value. Let's say we're given a value S, to lookup the bytes we want to check for S we hash it K number of times and then look those hashes up modulo the length of our byte array. 
+
+We can optimize this further by addressing individual bits instead of just using an entire byte to represent 1 or 0.
+So after we modulo by the size of the array, we can modulo once more by 8 to get the actual bit we want to turn on.
+```
+    byte_index = hash % array.len()
+    bit_index = byte_index % 8
+```
+Then to turn the bit on 
+```
+    array[byte_index] |= 2 ** bit_index
+```
+we just OR the byte with the appropriate power of 2. So, if we want to turn the 3rd bit on that's just ORing with 2^8.
