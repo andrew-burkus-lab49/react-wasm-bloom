@@ -1,11 +1,10 @@
-use crate::bloom::BloomFilter;
-
+use crate::bloom;
 #[cfg(test)]
 mod tests {
     use super::*;
     #[test]
     fn test_insert() {
-        let mut bloom_filter = BloomFilter::new(100);
+        let mut bloom_filter = bloom::BloomFilter::new(100);
         bloom_filter.insert("hello");
         bloom_filter.insert("world");
         assert_eq!(bloom_filter.contains("hello"), true);

@@ -1,5 +1,7 @@
 use crate::hash_fns;
 use wasm_bindgen::prelude::wasm_bindgen;
+#[cfg(test)]
+mod tests;
 
 #[derive(Debug)]
 #[wasm_bindgen]
