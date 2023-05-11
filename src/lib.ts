@@ -46,3 +46,12 @@ export const unpack = (key: string) =>
 export const getFilterLength = (falsePositiveRate: number, elementCount: number) => {
     return elementCount * -1 * (Math.log(falsePositiveRate) / Math.log(2) ** 2)
 }
+
+export const withCommas = (n: number): string => {
+    return Array.from(n.toString()).reduce((acc, cur, i) => {
+        if (i % 3 == 0 && i != 0) {
+            return acc + ',' + cur
+        }
+        return acc + cur
+    }, "")
+}

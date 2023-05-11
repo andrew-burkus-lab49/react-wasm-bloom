@@ -5,6 +5,7 @@ import Table from './Table'
 import InsertManager from './InsertManager'
 import useFilter from './useFilter'
 import Search from './Search'
+import { withCommas } from './lib'
 
 function App() {
   const [records, setRecords] = useState<Record<string, string>[]>([])
@@ -27,7 +28,8 @@ function App() {
       <InsertManager filter={filter} records={records} headers={headers} />
       <Search filter={filter} />
       <Box>
-        Filter size: {Math.floor(filterSize / 8)} bytes ({Math.floor(filterSize / 1000 / 8)} kB)
+        Filter size: {withCommas(Math.floor(filterSize / 8))} bytes
+        ({Math.floor(filterSize / 1000 / 8)} kB)
       </Box>
       <Input
         maxWidth="2xl"
