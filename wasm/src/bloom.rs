@@ -1,4 +1,5 @@
 use crate::hash_fns;
+use bit_vec::BitVec;
 use wasm_bindgen::prelude::wasm_bindgen;
 #[cfg(test)]
 mod tests;
@@ -6,7 +7,7 @@ mod tests;
 #[derive(Debug)]
 #[wasm_bindgen]
 pub struct BloomFilter {
-    hash_array: Vec<u8>,
+    bits: BitVec,
 }
 
 fn khash(s: &str) -> [u64; 5] {
@@ -23,7 +24,7 @@ impl BloomFilter {
     #[wasm_bindgen(constructor)]
     pub fn new(length: usize) -> BloomFilter {
         BloomFilter {
-            hash_array: vec![0; length],
+            bits: BitVec::with_capacity(length),
         }
     }
 
@@ -44,22 +45,14 @@ impl BloomFilter {
     }
 
     pub fn size(&self) -> usize {
-        self.hash_array.len()
+        self.bits.len()
     }
 
     fn set_bit(&mut self, index: u64) {
-        let length = self.hash_array.len();
-        let byte_index = index as usize % length;
-        let bit_index: u32 = (index % 8) as u32;
-
-        self.hash_array[byte_index] |= u8::pow(2, bit_index);
+        self.bits.set(index as usize, true);
     }
 
     fn get_bit(&self, hash: &u64) -> bool {
-        let length = self.hash_array.len();
-        let byte_index = *hash as usize % length;
-        let bit_index: u32 = (hash % 8) as u32;
-
-        self.hash_array[byte_index] & u8::pow(2, bit_index) > 0
+        self.bits.get(*hash as usize).unwrap_or(false)
     }
 }

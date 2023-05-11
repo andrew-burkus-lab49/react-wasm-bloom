@@ -44,5 +44,5 @@ export const unpack = (key: string) =>
             .filter(value => Boolean(value))
 
 export const getFilterLength = (falsePositiveRate: number, elementCount: number) => {
-    return 1 / 8 * elementCount * -1 * (Math.log(falsePositiveRate) / Math.log(2) ** 2)
+    return elementCount * -1 * (Math.log(falsePositiveRate) / Math.log(2) ** 2)
 }
