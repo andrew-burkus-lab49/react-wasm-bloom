@@ -8,7 +8,7 @@
     "build": "yarn build:wasm && tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "build:wasm": "cd wasm && wasm-pack build --target bundler"
+    "build:wasm": "wasm-pack build wasm --target bundler && yarn add ./wasm/pkg"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.0",
