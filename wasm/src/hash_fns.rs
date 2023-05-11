@@ -24,10 +24,7 @@ pub fn string_sum_hash(s: &str) -> u64 {
         .map(|byte| byte as u64)
         .reduce(|accum, cur| accum + cur);
 
-    match &out.is_some() {
-        true => out.unwrap(),
-        false => 0,
-    }
+    out.unwrap_or(0)
 }
 
 fn parse_8_bytes(hex_string: &str) -> u64 {
