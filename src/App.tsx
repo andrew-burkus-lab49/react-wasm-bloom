@@ -29,7 +29,7 @@ function App() {
       <Search filter={filter} />
       <Box>
         Filter size: {withCommas(Math.floor(filterSize / 8))} bytes
-        ({Math.floor(filterSize / 1000 / 8)} kB)
+        ({Math.floor(filterSize / 1000)} kB)
       </Box>
       <Input
         maxWidth="2xl"

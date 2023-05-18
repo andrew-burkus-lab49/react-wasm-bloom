@@ -7,7 +7,7 @@ mod tests;
 #[derive(Debug)]
 #[wasm_bindgen]
 pub struct BloomFilter {
-    bits: BitVec,
+    bits: Vec<bool>,
 }
 
 fn khash(s: &str) -> [u64; 5] {
@@ -24,7 +24,7 @@ impl BloomFilter {
     #[wasm_bindgen(constructor)]
     pub fn new(length: usize) -> BloomFilter {
         BloomFilter {
-            bits: BitVec::with_capacity(length),
+            bits: vec![false; length],
         }
     }
 
@@ -32,7 +32,7 @@ impl BloomFilter {
         let hashes = khash(query);
         hashes
             .iter()
-            .map(|hash: &u64| self.get_bit(hash))
+            .map(|hash: &u64| self.get_bit(*hash))
             .reduce(|accum, cur| accum && cur)
             .unwrap()
     }
@@ -49,10 +49,12 @@ impl BloomFilter {
     }
 
     fn set_bit(&mut self, index: u64) {
-        self.bits.set(index as usize, true);
+        let length = self.bits.len();
+        self.bits[index as usize % length] = true;
     }
 
-    fn get_bit(&self, hash: &u64) -> bool {
-        self.bits.get(*hash as usize).unwrap_or(false)
+    fn get_bit(&self, hash: u64) -> bool {
+        let length = self.bits.len();
+        self.bits[hash as usize % length]
     }
 }

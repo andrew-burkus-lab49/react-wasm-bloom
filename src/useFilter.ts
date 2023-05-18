@@ -1,4 +1,4 @@
-import { BloomFilter } from "wasm"
+import { BloomFilter } from "wasm";
 import { useState, useEffect } from "react";
 import { getFilterLength } from './lib'
 
